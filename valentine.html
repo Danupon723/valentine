@@ -14,13 +14,12 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: #ffe6f2; /* สีชมพูอ่อน */
+            background: #ffe6f2;
             font-family: 'Mitr', sans-serif;
             overflow: hidden;
             text-align: center;
         }
 
-        /* ตกแต่งการ์ดตรงกลาง */
         .container {
             background: rgba(255, 255, 255, 0.8);
             padding: 40px;
@@ -55,7 +54,6 @@
             50% { transform: scale(1.2); }
         }
 
-        /* ส่วนของปุ่ม */
         .btn-group {
             display: flex;
             flex-direction: column;
@@ -84,7 +82,6 @@
             transform: translateY(-3px);
         }
 
-        /* สไตล์ของดอกไม้ที่ร่วงหล่น */
         .flower {
             position: fixed;
             top: -50px;
@@ -95,12 +92,10 @@
         }
 
         @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-            }
+            to { transform: translateY(100vh) rotate(360deg); }
         }
 
-        /* Popup (Modal) */
+        /* Popup Setup */
         .overlay {
             position: fixed;
             top: 0;
@@ -108,7 +103,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
-            display: none; /* ปิดไว้ก่อน */
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 100;
@@ -120,7 +115,8 @@
             padding: 30px;
             border-radius: 30px;
             position: relative;
-            max-width: 80%;
+            max-width: 85%;
+            width: 350px;
             animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
@@ -130,10 +126,30 @@
             to { transform: scale(1); opacity: 1; }
         }
 
-        .flower-bundle {
-            font-size: 80px;
-            display: block;
-            margin-bottom: 10px;
+        /* กรอบรูปหัวใจ/นุ่มนวล */
+        .flower-frame {
+            width: 200px;
+            height: 200px;
+            margin: 10px auto;
+            padding: 8px;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; /* ทรงโค้งนุ่มๆ */
+            box-shadow: 0 8px 20px rgba(255, 154, 158, 0.4);
+            overflow: hidden;
+            animation: morphing 6s ease-in-out infinite;
+        }
+
+        @keyframes morphing {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            50% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        .flower-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
         }
 
         .close-btn {
@@ -144,58 +160,14 @@
             cursor: pointer;
             color: #ff4d94;
             font-weight: bold;
+            z-index: 101;
         }
 
-        /* ===== กรอบรูปดอกไม้ ===== */
-.flower-frame {
-    width: 220px;
-    height: 220px;
-    margin: 0 auto 15px;
-    padding: 10px;
-    border-radius: 25px;
-
-    background: linear-gradient(145deg, #ffd6ec, #ffffff);
-    box-shadow:
-        0 10px 25px rgba(255, 105, 180, 0.3),
-        inset 0 0 15px rgba(255,255,255,0.8);
-
-    position: relative;
-}
-
-/* วงแสงด้านหลัง */
-.flower-frame::before {
-    content: "";
-    position: absolute;
-    inset: -8px;
-    border-radius: 30px;
-    background: linear-gradient(45deg,#ffb3d9,#ffd6ec,#fff);
-    z-index: -1;
-    filter: blur(10px);
-    opacity: 0.7;
-}
-
-/* รูป */
-.flower-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 18px;
-    animation: floatImage 3s ease-in-out infinite;
-}
-
-/* รูปลอยนิดๆ */
-@keyframes floatImage {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-}
-
-/* หัวข้อ popup */
-.popup-title {
-    color: #ff4d94;
-    margin: 20px 0 10px;
-    text-shadow: 0 3px 10px rgba(255,77,148,0.3);
-}
-
+        .popup-title {
+            color: #ff4d94;
+            margin: 15px 0 5px;
+            font-size: 1.5rem;
+        }
     </style>
 </head>
 <body>
@@ -211,66 +183,49 @@
         </div>
     </div>
 
-    <div class="overlay" id="overlay">
-<div class="popup">
-    <span class="close-btn" onclick="togglePopup(false)">✕</span>
-
-    <div class="flower-frame">
-        <img src="https://library.wu.ac.th/content/wp-content/uploads/sites/8/2025/01/%E0%B8%8A%E0%B9%88%E0%B8%AD%E0%B8%94%E0%B8%AD%E0%B8%81%E0%B9%84%E0%B8%A1%E0%B9%89%E0%B8%81%E0%B8%A5%E0%B8%A1%E0%B8%A2%E0%B8%B2%E0%B8%A7.jpg"
-             alt="flower"
-             class="flower-img">
-    </div>
-
-    <h2 class="popup-title">ช่อนี้ให้เธอนะ!</h2>
-    <p>
-        แทนความรักและความคิดถึง <br>
-        ยิ้มเยอะๆ นะครับคนเก่ง
-    </p>
-</div>
-
+    <div class="overlay" id="overlay" onclick="closeOutside(event)">
+        <div class="popup" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="togglePopup(false)">✕</span>
+            <div class="flower-frame">
+                <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                     alt="Flower Bouquet" 
+                     class="flower-img">
+            </div>
+            <h2 class="popup-title">ช่อนี้ให้เธอนะ!</h2>
+            <p>แทนความรักและความคิดถึง <br> ยิ้มเยอะๆ นะครับคนเก่ง</p>
+        </div>
     </div>
 
     <script>
-        // ฟังก์ชันสร้างดอกไม้สุ่มโปรยปราย
         function createFlower() {
             const flowers = ['🌸', '🌹', '🌺', '🌷', '🌼', '✨'];
             const flower = document.createElement('div');
             flower.classList.add('flower');
-            
             flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
             flower.style.left = Math.random() * 100 + "vw";
-            
             const duration = Math.random() * 4 + 3;
             flower.style.animationDuration = duration + "s";
             flower.style.fontSize = Math.random() * 20 + 20 + "px";
-
             document.body.appendChild(flower);
-
-            setTimeout(() => {
-                flower.remove();
-            }, duration * 1000);
+            setTimeout(() => { flower.remove(); }, duration * 1000);
         }
 
-        // เริ่มโปรยดอกไม้ทันที
-        setInterval(createFlower, 300);
+        setInterval(createFlower, 400);
 
-        // ฟังก์ชันเมื่อกดปุ่มระเบิดดอกไม้
         function extraFlowers() {
             for(let i=0; i<30; i++) {
                 setTimeout(createFlower, i * 50);
             }
         }
 
-        // ฟังก์ชัน เปิด-ปิด Popup
         function togglePopup(show) {
             const overlay = document.getElementById('overlay');
-            if (show) {
-                overlay.style.display = 'flex';
-                // เมื่อเปิดช่อดอกไม้ ให้ดอกไม้โปรยลงมาเยอะๆ ด้วย
-                extraFlowers(); 
-            } else {
-                overlay.style.display = 'none';
-            }
+            overlay.style.display = show ? 'flex' : 'none';
+            if (show) extraFlowers();
+        }
+
+        function closeOutside(e) {
+            togglePopup(false);
         }
     </script>
 </body>
