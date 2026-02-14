@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day My Love</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300;500&family=Pacifico&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #ffe6f2; /* สีชมพูอ่อน */
+            font-family: 'Mitr', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* ตกแต่งการ์ดตรงกลาง */
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+            backdrop-filter: blur(5px);
+            z-index: 10;
+            max-width: 400px;
+            border: 2px solid #ffb3d9;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #ff4d94;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .heart {
+            color: #ff4d94;
+            font-size: 50px;
+            animation: beat 1s infinite;
+        }
+
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* ส่วนของปุ่ม */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: #ff4d94;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 77, 148, 0.4);
+        }
+
+        .btn-special {
+            background: #ff85a2;
+        }
+
+        .btn:hover {
+            background: #ff1a75;
+            transform: translateY(-3px);
+        }
+
+        /* สไตล์ของดอกไม้ที่ร่วงหล่น */
+        .flower {
+            position: fixed;
+            top: -50px;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Popup (Modal) */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none; /* ปิดไว้ก่อน */
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        .popup {
+            background: white;
+            padding: 30px;
+            border-radius: 30px;
+            position: relative;
+            max-width: 80%;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .flower-bundle {
+            font-size: 80px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ff4d94;
+            font-weight: bold;
+        }
+
+        /* ===== กรอบรูปดอกไม้ ===== */
+.flower-frame {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 15px;
+    padding: 10px;
+    border-radius: 25px;
+
+    background: linear-gradient(145deg, #ffd6ec, #ffffff);
+    box-shadow:
+        0 10px 25px rgba(255, 105, 180, 0.3),
+        inset 0 0 15px rgba(255,255,255,0.8);
+
+    position: relative;
+}
+
+/* วงแสงด้านหลัง */
+.flower-frame::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 30px;
+    background: linear-gradient(45deg,#ffb3d9,#ffd6ec,#fff);
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0.7;
+}
+
+/* รูป */
+.flower-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+    animation: floatImage 3s ease-in-out infinite;
+}
+
+/* รูปลอยนิดๆ */
+@keyframes floatImage {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* หัวข้อ popup */
+.popup-title {
+    color: #ff4d94;
+    margin: 20px 0 10px;
+    text-shadow: 0 3px 10px rgba(255,77,148,0.3);
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="heart">❤️</div>
+        <h1>Happy Valentine's Day</h1>
+        <p>Happy Valentine ย้อนหลังนะคะ <br> เค้าจะคอยอยู่ข้างๆเเบบนี้ไปนานๆ <br> เเล้วก็ขอให้เรารักกันเเบบนี้ไปตลอดเลยนะ</p>
+        
+        <div class="btn-group">
+            <button class="btn" onclick="extraFlowers()">อยากได้ดอกไม้ให้กดนี่🌸</button>
+            <button class="btn btn-special" onclick="togglePopup(true)">รับช่อดอกไม้ใหญ่ 💐</button>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay">
+<div class="popup">
+    <span class="close-btn" onclick="togglePopup(false)">✕</span>
+
+    <div class="flower-frame">
+        <img src="https://library.wu.ac.th/content/wp-content/uploads/sites/8/2025/01/%E0%B8%8A%E0%B9%88%E0%B8%AD%E0%B8%94%E0%B8%AD%E0%B8%81%E0%B9%84%E0%B8%A1%E0%B9%89%E0%B8%81%E0%B8%A5%E0%B8%A1%E0%B8%A2%E0%B8%B2%E0%B8%A7.jpg"
+             alt="flower"
+             class="flower-img">
+    </div>
+
+    <h2 class="popup-title">ช่อนี้ให้เธอนะ!</h2>
+    <p>
+        แทนความรักและความคิดถึง <br>
+        ยิ้มเยอะๆ นะครับคนเก่ง
+    </p>
+</div>
+
+    </div>
+
+    <script>
+        // ฟังก์ชันสร้างดอกไม้สุ่มโปรยปราย
+        function createFlower() {
+            const flowers = ['🌸', '🌹', '🌺', '🌷', '🌼', '✨'];
+            const flower = document.createElement('div');
+            flower.classList.add('flower');
+            
+            flower.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+            flower.style.left = Math.random() * 100 + "vw";
+            
+            const duration = Math.random() * 4 + 3;
+            flower.style.animationDuration = duration + "s";
+            flower.style.fontSize = Math.random() * 20 + 20 + "px";
+
+            document.body.appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, duration * 1000);
+        }
+
+        // เริ่มโปรยดอกไม้ทันที
+        setInterval(createFlower, 300);
+
+        // ฟังก์ชันเมื่อกดปุ่มระเบิดดอกไม้
+        function extraFlowers() {
+            for(let i=0; i<30; i++) {
+                setTimeout(createFlower, i * 50);
+            }
+        }
+
+        // ฟังก์ชัน เปิด-ปิด Popup
+        function togglePopup(show) {
+            const overlay = document.getElementById('overlay');
+            if (show) {
+                overlay.style.display = 'flex';
+                // เมื่อเปิดช่อดอกไม้ ให้ดอกไม้โปรยลงมาเยอะๆ ด้วย
+                extraFlowers(); 
+            } else {
+                overlay.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
